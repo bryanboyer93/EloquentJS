@@ -116,3 +116,80 @@ MUTABILITY
 When we have two numbers, 120 and 120, we can consider them precisely the same number, whether or not they refer to the same physical bits. But with objects, there is a difference between having two references to the same object and having two different objects that contain the same properties. Consider the following code:var object1 = {value: 10};var object2 = object1;var object3 = {value: 10};console.log(object1 == object2);// ▹ trueconsole.log(object1 == object3);// ▹ falseobject1.value = 15;console.log(object2.value);// ▹ 15console.log(object3.value);// ▹ 10
 
 
+ARRAYS
+.push = inserts at the end of the ARRAY 
+.unshift = inserts at the beginning of the ARRAY
+.pop = removes from the end of the ARRAY
+.shift = removes from the beginning of the ARRAY
+
+var array = [1,2,3,4,5];
+console.log(array);
+console.log(array.push(6));
+console.log(array);
+console.log(array.pop());
+console.log(array);
+console.log(array.shift());
+console.log(array);
+console.log(array.unshift(1));
+console.log(array);
+
+[1, 2, 3, 4, 5]
+6
+[1, 2, 3, 4, 5, 6]
+6
+[1, 2, 3, 4, 5]
+1
+[2, 3, 4, 5]
+5
+[1, 2, 3, 4, 5]
+
+The indexOf method has a sibling called lastIndexof, which starts searching for the given element at the end of the array instead of the front.
+
+console.log([1, 2, 3, 2, 1].indexOf(2));
+// ▹ 1
+console.log([1, 2, 3, 2, 1].lastIndexOf(2));
+// ▹ 3
+
+Another fundamental method is slice, which takes a start index and an end index and returns an array that has only the elements between those indices. The start index is inclusive, the end index exclusive.
+
+console.log([0, 1, 2, 3, 4].slice(2, 4));
+// ▹ [2, 3]
+console.log([0, 1, 2, 3, 4].slice(2));
+// ▹ [2, 3, 4]
+
+ARGUMENTS in Functions
+function argumentCounter() {
+  console.log("You gave me", arguments.length, "arguments.");
+}
+argumentCounter("Straw man", "Tautology", "Ad hominem");
+// ▹ You gave me 3 arguments.
+
+
+Most values in JavaScript have properties, the exceptions being null and undefined. Properties are accessed using value.propName or value["propName"]. Objects tend to use names for their properties and store more or less a fixed set of them. Arrays, on the other hand, usually contain varying numbers of conceptually identical values and use numbers (starting from 0) as the names of their properties.There are some named properties in arrays, such as length and a number of methods. Methods are functions that live in properties and (usually) act on the value they are a property of.Objects can also serve as maps, associating values with names. The in operator can be used to find out whether an object contains a property with a given name. The same keyword can also be used in a for loop (for (var name in object)) to loop over an object’s properties.
+
+function range(start, end, step = start < end ? 1 : -1) {
+  let array = [];
+
+  if (step > 0) {
+    for (let i = start; i <= end; i += step) array.push(i);
+  } else {
+    for (let i = start; i >= end; i += step) array.push(i);
+  }
+  return array;
+}
+
+function sum(array) {
+  let total = 0;
+  for (let value of array) {
+    total += value;
+  }
+  return total;
+}
+
+console.log(range(1, 10))
+// → [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+console.log(range(5, 2, -1));
+// → [5, 4, 3, 2]
+console.log(sum(range(1, 10)));
+// → 55
+
