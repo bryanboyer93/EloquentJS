@@ -1,3 +1,6 @@
+http://eloquentjavascript.net/Eloquent_JavaScript.pdf
+
+
 SANDBOX
 http://eloquentjavascript.net/code/#2
 
@@ -193,3 +196,50 @@ console.log(range(5, 2, -1));
 console.log(sum(range(1, 10)));
 // → 55
 
+The bind method, which all functions have, creates a new function that will call the original function but with some of the arguments already fixed.
+
+The following code shows an example of bind in use. It defines a function isInSet that tells us whether a person is in a given set of strings. To call filter in order to collect those person objects whose names are in a specific set, we can either write a function expression that makes a call to isInSet with our set as its first argument or partially apply the isInSet function.
+
+var theSet = ["Carel Haverbeke", "Maria van Brussel",
+              "Donald Duck"];
+function isInSet(set, person) {
+  return set.indexOf(person.name) > -1;
+}
+console.log(ancestry.filter(function(person) {
+  return isInSet(theSet, person);
+}));
+// ▹ [{name: "Maria van Brussel", ...},
+//            {name: "Carel Haverbeke", ...}]
+console.log(ancestry.filter(isInSet.bind(null, theSet)));
+// ▹ ... same result
+
+
+
+Arrays provide a number of useful higher-order methods—forEach to do something with each element in an array, filter to build a new array with some elements filtered out, map to build a new array where each element has been put through a function, and reduce to combine all an array’s elements into a single value.
+
+Functions have an apply method that can be used to call them with an array specifying their arguments. They also have a bind method, which is used to create a partially applied version of the function.
+
+
+call(), apply(), bind()
+https://www.codementor.io/niladrisekhardutta/how-to-call-apply-and-bind-in-javascript-8i1jca6jp
+//Use .bind() javascript
+
+var obj = {name:"Niladri"};
+
+var greeting = function(a,b,c){
+    return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+};
+
+//creates a bound function that has same body and parameters 
+var bound = greeting.bind(obj); 
+
+
+console.dir(bound); ///returns a function
+
+console.log("Output using .bind() below ");
+
+console.log(bound("Newtown","KOLKATA","WB")); //call the bound function
+
+/* the output will be 
+Output using .bind() below
+welcome Niladri to Newtown KOLKATA in WB */
